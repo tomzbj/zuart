@@ -10,6 +10,9 @@ typedef struct {
     void (*parser_f)(const void* msg, int size, int source);
     unsigned char (*readbyte_f)(int source);
     void (*writebyte_f)(unsigned char data, int source);
+
+    void (*pre_tx_f)(int source);
+    void (*post_tx_f)(int source);
 } zu_cfg_t;
 
 void zu_poll(void);

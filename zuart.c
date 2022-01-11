@@ -47,10 +47,12 @@ void zu_writedata(const void* msg, int size, int usart_id)
     p->tx_ptr = p->tx_buf + 1;
     p->tx_size = size - 1;
 #else
+    g.cfg.pre_tx_f(usart_id);
     for(int i = 0; i < size; i++) {
         g.cfg.writebyte_f(*(unsigned char*)msg, usart_id);
         msg++;
     }
+    g.cfg.post_tx_f(usart_id);
 #endif
 }
 
